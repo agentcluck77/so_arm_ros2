@@ -21,10 +21,12 @@
        STS models could share this bus) -->
   <xacro:property name="sts_protocol_max_vel_steps" value="65535"/>  <!-- protocol's own u16 ceiling - let servo firmware, not us, set the real cap -->
 
-  <!-- Maximum allowable torque/velocity for each motor -->
-  <xacro:property name="max_velocity_steps" value="${sts_protocol_max_vel_steps}"/>  <!-- full hardware max -->
-  <xacro:property name="max_velocity_rads" value="${max_velocity_steps*2*pi/4096}"/>  <!-- rad/s -->
-  <xacro:property name="max_torque_nm" value="2.942"/>  <!-- N⋅m (30 kgf⋅cm for STS3215) -->
+  <!-- Maximum allowable torque/velocity for each motor. "arm_"-prefixed to avoid clashing
+       with lekiwi_description's own same-named properties (xacro's flat namespace) once
+       both are composed in base_so101. -->
+  <xacro:property name="arm_max_velocity_steps" value="${sts_protocol_max_vel_steps}"/>  <!-- full hardware max -->
+  <xacro:property name="arm_max_velocity_rads" value="${arm_max_velocity_steps*2*pi/4096}"/>  <!-- rad/s -->
+  <xacro:property name="arm_max_torque_nm" value="2.942"/>  <!-- N⋅m (30 kgf⋅cm for STS3215) -->
 
   <!-- Position-mode (Mode 0) internal servo PID, written to EEPROM on activate -->
   <xacro:property name="shoulder_pan_p_coefficient" value="14"/>
